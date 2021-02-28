@@ -1,0 +1,12 @@
+.msg {
+    width: 100%;
+    line-height: 5vh;
+    padding-left: 1vw;
+    font-style: italic;
+}
+.msgSky {
+    background-color: #65A5D1;
+}
+.msgSteel {
+    background-color: #9ABAD1;
+}
