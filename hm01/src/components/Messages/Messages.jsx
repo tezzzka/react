@@ -1,62 +1,54 @@
 import { Component } from 'react';
-import './Messages.css';
-import PropTypes from 'prop-types';
-
-const classesX = ['msg msgSteel', 'msg msgSky'];
-var ix = 0;
+// import './Messages.css';
+import { Message } from '../Message';
 
 class Messages extends Component {
-    static propTypes = {
-        entry: PropTypes.array.isRequired,
-        count: PropTypes.number,
-        handleClick: PropTypes.func,
-    }
-
     state = {
-        intervalId: null
+        messages: [
+            { id: 1, value: 'AI: Hello world', author: 'Al Paccino', timestamp: new Date() },
+            { id: 2, value: 'Finnaly, Im wondered.', author: 'Feel', timestamp: new Date() },
+            { id: 3, value: 'Good Job, Mr.', author: 'Captain OneX', timestamp: new Date() }
+        ]
+    };
+
+    componentDidUpdate() {
+        console.log('test');
     }
 
-    componentDidMount() {
-        const id = setInterval(() => {
-            console.log('interval');
-        }, 1000);
-        this.setState({ intervalId: id });
+    componentDidUpdate() {
+        if (this.state.messages.length % 2 === 0) {
+            setTimeout(() => {
+                this.setState({
+                    messages: [
+                        ...this.state.messages,
+                        { id: 5, value: 'AI: Im just a boy-bot.', author: 'AI', timestamp: new Date() }
+                    ]
+                });
+            }, 1500);
+        }
     }
-    componentWillUnmount() {
-        clearInterval(this.state.intervalId);
+
+    addMessage = () => {
+        this.setState({
+            messages: [
+                ...this.state.messages,
+                { id: 5, value: 'Id like to intoroduce to you all the world!', author: 'You', timestamp: new Date() }
+            ]
+        });
     }
+
     render() {
-        const { entry = [], count, handleClick, handleChange } = this.props;
         return (
             <>
-                <div className="messages" onChange={handleChange}>
-                    {entry.map((item, index) => (
-                        <Message key={index} text={item} />
+                <div className="messages">
+                    {this.state.messages.map((item, index) => (
+                        <Message key={index} text={item.value} />
                     ))}
                 </div>
-                <button onClick={handleClick}>{count}</button>
+                <button onClick={this.addMessage}>Send message</button>
             </>
         );
     }
-}
-
-
-
-// const Messages = (props) => {
-//     const {entry = []} = props;
-//     return (
-//         <div className="messages">
-//             {entry.map((item,index) => (
-//                 <Message key={index} text={item} />
-//             ))}    
-//         </div>
-//     );
-// };
-
-const Message = (props) => {
-    let res = <div className={classesX[ix]}>{props.text}</div>;
-    ix == 0 ? ix = 1 : ix = 0;
-    return res;
 }
 
 export { Messages };
