@@ -1,0 +1,24 @@
+.msgBlock {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+#Chat {
+    /* border: 1px solid yellow; */
+    
+}
+.Footer {
+    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.messageTextField {
+    float: left;
+}
+.sendButton {
+    border: 1px solid greenyellow;
+    float:right;
+}
+.btn {
+    height: 100%;
+}
