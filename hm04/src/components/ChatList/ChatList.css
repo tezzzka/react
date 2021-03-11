@@ -1,0 +1,15 @@
+#ChatList {
+
+    width:30%;
+    /* border: 1px solid green; */
+    float: left;
+    max-height: 100%;
+    height: 100%;
+    overflow:hidden;
+
+
+}
+.MuiTypography-body1 {
+    font-size: 0.5rem !important;
+    font-weight: 400;
+}

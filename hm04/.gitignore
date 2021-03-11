@@ -1,0 +1,10 @@
+node_modules/
+static/
+build/
+dist/
+.cache/
+hm01/
+hm03/
+.gitignore
+../hm01/
+../README.md

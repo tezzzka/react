@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding:0;
+    /* background-color: dimgray;  */
+    /* background-image: url('bgrounds/background19.png'); */
+}
+.bg_1 {
+    background-image: url('./bgrounds/white-metal-grid.png');
+}
+.bg_2 {
+    background-image: url('./bgrounds/white-buds.png');
+}
+.bg_3 {
+    background-image: url('./bgrounds/background28.jpg');
+}
+.bg_4 {
+    background-image: url('./bgrounds/background20.jpg');
+}
+#root {
+    background-image: url('./bgrounds/background19.png');
+}
