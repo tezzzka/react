@@ -7,3 +7,9 @@
 #root {
     position: relative;
 }
+.clear {
+    clear: left;
+}
+.nav {
+    float:left;
+}

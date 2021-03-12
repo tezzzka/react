@@ -1,15 +1,12 @@
-.logotype img {
-    width: 3.5rem;
-    height: 3.5rem;
-    margin-left: 1rem;
-    float: left;
-    min-width: 64px;
-    min-height: 64px;
-    
+.ava {
+    float: right !important;
+    margin-right: 1rem;
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
- 
+    min-width: 48px;
+    min-height: 48px;
 }
+

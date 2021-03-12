@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding:0;
     /* background-color: dimgray;  */
-    /* background-image: url('bgrounds/background19.png'); */
+    background-image: url('bgrounds/background19.png'); 
 }
 .bg_1 {
     background-image: url('./bgrounds/white-metal-grid.png');

@@ -16,7 +16,7 @@ const ChatBox = [
 function ChatList() {
     const useStyles = makeStyles((theme) => ({
         root: {
-            width: '25%',
+            width: '20% !important',
             // backgroundColor: theme.palette.background.paper,
         },
         nested: {
@@ -30,7 +30,7 @@ function ChatList() {
     const classes = useStyles();
     return (
         <div id="ChatList" className={classes.root}>
-            <List component="nav" aria-label="secondary mailbox folders" className={classes.root}>
+            <List component="nav" className={classes.root}>
                 {
                     ChatBox.map((Obj) => (
                         // console.log(Obj.idx)

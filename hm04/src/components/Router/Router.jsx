@@ -29,8 +29,8 @@ const Router = () => {
             <Route exact path="/chat/SleepyChat" component={() => <Layout MessageBox={SleepyChatBox} />} />
             <Route exact path="/chat/ModerChat" component={() => <Layout MessageBox={ModerChatBox} />} />
             <Route exact path="/chat/chatid" component={NotFound} />
-
-
+            <Route exact path="/profile">{'Здесь сделаю форму настроек имени и загрузки фото как аватара, но потом :) иначе не успею сделать все дз :)'}</Route>
+            <Route exact path="/new">{'К сожалению не успел ф.нового чата ('}</Route>
             <Route component={NotFound} />
         </Switch >
     )

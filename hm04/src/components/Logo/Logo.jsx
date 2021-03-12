@@ -1,6 +1,8 @@
+import logo from './Logo.png'
+import './Logo.css';
 
 const Logo = () => {
-    return (<img src="" />)
+    return (<a href="/" className={"logotype"}><img src={logo} /></a>)
 }
 
 export { Logo };
