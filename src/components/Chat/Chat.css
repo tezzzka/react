@@ -1,0 +1,31 @@
+.msgBlock {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+#Chat {
+    /* border: 1px solid yellow;  */
+    
+}
+.Footer {
+    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.messageTextField {
+    float: left;
+}
+.sendButton {
+    /* border: 1px solid greenyellow; */
+    float:right;
+}
+.btn {
+    height: 100%;
+}
+.MuiTextField-root label {
+    font-weight: 300 !important;
+    font-size: 0.5rem !important;
+}
+.SendClass {
+    background-color: #009999 !important;
+}

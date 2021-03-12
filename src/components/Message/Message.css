@@ -1,0 +1,31 @@
+.msg {
+    border-radius: 10px;
+    padding-left: 1vw;
+    max-width: 30vw;
+    max-height: 10vh;
+    margin: 10px 0;
+    padding: 10px 15px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.ai {
+    background-color: #CC3333;
+}
+.ai:hover {
+    background-color: #FF9966;
+}
+.human {
+    background-color: #009999;
+}
+.human:hover {
+    background-color: #66cccc;
+}
+
+
+.msgAuthor {
+    font-size: 0.6rem;
+    color:#CCFF66;   
+}
+.msgText {
+    font-size: .5rem;
+}
