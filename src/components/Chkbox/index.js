@@ -1,1 +1,0 @@
-export { Chkbox } from './Chkbox';
