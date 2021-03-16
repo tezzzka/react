@@ -1,0 +1,69 @@
+[
+    {
+        "name": "WowChat",
+        "target": "/chat/WowChat",
+        "message": [
+            {
+                "value": "Hello",
+                "author": "AI"
+            },
+            {
+                "value": "Are u OK?",
+                "author": "human"
+            },
+            {
+                "value": "--yea, sure )",
+                "author": "AI"
+            }
+        ]
+    },
+    {
+        "name": "ReadyChat",
+        "target": "/chat/ReadyChat",
+        "message": [
+            {}
+        ]
+    },
+    {
+        "name": "SnapChat",
+        "target": "/chat/SnapChat",
+        "message": [
+            {
+                "value": "Use Google",
+                "author": "AI"
+            },
+            {
+                "value": "is an intelligent and secure communications tool...",
+                "author": "human"
+            }
+        ]
+    },
+    {
+        "name": "GoChat",
+        "target": "/chat/GoChat",
+        "message": [
+            {
+                "value": "Use Google",
+                "author": "AI"
+            },
+            {
+                "value": "is an intelligent and secure communications tool...",
+                "author": "human"
+            }
+        ]
+    },
+    {
+        "name": "JSChat",
+        "target": "/chat/JSChat",
+        "message": [
+            {
+                "value": "Use Google",
+                "author": "AI"
+            },
+            {
+                "value": "is an intelligent and secure communications tool...",
+                "author": "human"
+            }
+        ]
+    }
+]

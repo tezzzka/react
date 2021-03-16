@@ -21,8 +21,11 @@ class _Chat extends Component {
     state = {
         messages: this.props.MessageBox,
     };
-
+    componentDidMount() {
+        this.scrollToBottom();
+    }
     componentDidUpdate(prevProps, prevState) {
+        this.scrollToBottom();
         // if (prevState.messages.length !== this.state.messages.length &&
         //     this.state.messages.length % 2 === 0) {
         //     setTimeout(() => {
@@ -34,6 +37,10 @@ class _Chat extends Component {
         //         });
         //     }, 600);
         // }
+    }
+
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     addMessage = () => {
@@ -63,12 +70,15 @@ class _Chat extends Component {
             <div id="Chat">
                 <div className="msgBlock">
                     {(this.state.messages &&
-                        this.state.messages.map(obj => (
-                            <Message key={obj.id} text={obj.value} author={obj.author}
+                        this.state.messages.map((obj, id) => (
+                            <Message key={id} text={obj.value} author={obj.author}
                                 className={obj.author == 'AI' ? ' ai' : ' human'}
                             />
                         ))
                     )}
+                    <div style={{ float: "left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                 </div>
                 <div className="Footer">
                     <div className="messageTextField">

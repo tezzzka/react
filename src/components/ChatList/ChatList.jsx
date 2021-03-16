@@ -7,17 +7,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
 
-const ChatBox = [
-    { idx: 0, name: 'WowChat', target: '/chat/WowChat' },
-    { idx: 1, name: 'SleepyChat', target: '/chat/SleepyChat' },
-    { idx: 2, name: 'ModernChat', target: '/chat/ModerChat', slug: 'conversation' },
-]
-
-function ChatList() {
+function ChatList(NavLink = null) {
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '20% !important',
-            // backgroundColor: theme.palette.background.paper,
         },
         nested: {
             paddingLeft: theme.spacing(4),
@@ -28,21 +21,19 @@ function ChatList() {
         return <ListItem button component="a" {...props} />;
     }
     const classes = useStyles();
+    // console.log(NavLink);
+
     return (
         <div id="ChatList" className={classes.root}>
             <List component="nav" className={classes.root}>
-                {
-                    ChatBox.map((Obj) => (
-                        // console.log(Obj.idx)
-                        <Link key={Obj.idx} to={Obj.target}>
-                            <ListItem button>
-                                <ListItemText primary={Obj.name} />
-                            </ListItem>
-                        </Link>
-                    ))
+                {NavLink.NavLink.map((link, index) => (
+                    < Link key={index} to={link.NavLink} >
+                        <ListItem button>
+                            <ListItemText primary={link.ChatName} />
+                        </ListItem>
+                    </Link>
+                ))
                 }
-
-
             </List>
         </div >
     );

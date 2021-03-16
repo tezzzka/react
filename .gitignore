@@ -3,3 +3,8 @@ static/
 build/
 dist/
 .cache/
+src/components/Button/
+src/components/Chkbox/
+src/components/DialogModal/
+src/components/Form/
+src/components/Messages/

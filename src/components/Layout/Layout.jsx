@@ -6,7 +6,6 @@ import { Chat } from '../Chat';
 import { withRouter } from 'react-router';
 import './Layout.css';
 
-
 class _Layout extends Component {
     static propTypes = {
         match: PropTypes.object.isRequired,
@@ -14,17 +13,16 @@ class _Layout extends Component {
         history: PropTypes.object.isRequired
     };
     render() {
-        const { match, MessageBox } = this.props;
-        console.log(match);
         return (
             <>
-                <ChatList />
+                <ChatList NavLink={this.props.NavLink} />
                 <div id="Layout">
                     <MessageField>
-                        <Chat MessageBox={MessageBox} />
+                        <Chat MessageBox={this.props.Chat} />
                     </MessageField>
                 </div>
             </>
+
         )
     }
 }

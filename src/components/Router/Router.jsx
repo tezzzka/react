@@ -1,38 +1,44 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { Component } from 'react';
 import { Layout } from '../Layout';
-import { Header } from '../Header';
-import { MessageField } from '../MessageField';
-import { Chat } from '../Chat';
 import { NotFound } from '../NotFound';
-import { ChatList } from '../ChatList';
 
 import './Router.css';
+import json from '../../JSON/Chats.json';
+import { render } from 'react-dom';
 
-// Для примера. Будем брать (и записывать) из/в json или db.
-const WowChatBox = [
-    { id: 0, value: 'Hello, Im a WowChat introducer. Ure Welcome!', author: 'AI', timestamp: new Date(), idx: 'WowChat' }
-];
-const SleepyChatBox = [
-    { id: 0, value: 'helo', author: 'AI', timestamp: new Date(), idx: 'SleepyChat' },
-    { id: 1, value: 'fine', author: 'AI', timestamp: new Date(), idx: 'SleepyChat' },
-    { id: 2, value: 'be sure aware smt else...', author: 'AI', timestamp: new Date(), idx: 'SleepyChat' }
-]
-const ModerChatBox = [
-    { id: 1, value: 'Finnaly, good work!', author: 'human', timestamp: new Date(), idx: 'ModerChat', idx: 'ModerChat' }
-]
+class Router extends Component {
+    NavLinks = (obj) => {
+        let Nav = []
+        obj.map((chat) => {
+            const X = { ChatName: chat.name, NavLink: chat.target };
+            Nav.push(X);
+        });
+        return Nav;
+    }
+    componentDidMount() {
 
-const Router = () => {
-    return (
-        <Switch>
-            <Route exact path="/">{<Redirect to="/chat/WowChat" />}</Route>
-            <Route exact path="/chat/WowChat" component={() => <Layout MessageBox={WowChatBox} />} />
-            <Route exact path="/chat/SleepyChat" component={() => <Layout MessageBox={SleepyChatBox} />} />
-            <Route exact path="/chat/ModerChat" component={() => <Layout MessageBox={ModerChatBox} />} />
-            <Route exact path="/chat/chatid" component={NotFound} />
-            <Route exact path="/profile">{'Здесь сделаю форму настроек имени и загрузки фото как аватара, но потом :) иначе не успею сделать все дз :)'}</Route>
-            <Route exact path="/new">{'К сожалению не успел ф.нового чата ('}</Route>
-            <Route component={NotFound} />
-        </Switch >
-    )
+    }
+    componentDidUpdate() {
+
+    }
+    render() {
+        let Nav = this.NavLinks(json);
+        return (
+            <Switch>
+                <Route exact path="/">{<Redirect to="/chat/WowChat" />}</Route>
+                <Route exact path={json[0].target} component={() => <Layout Chat={json[0].message} NavLink={Nav} />} />
+                <Route exact path={json[1].target} component={() => <Layout Chat={json[1].message} NavLink={Nav} />} />
+                <Route exact path={json[2].target} component={() => <Layout Chat={json[2].message} NavLink={Nav} />} />
+                <Route exact path={json[3].target} component={() => <Layout Chat={json[3].message} NavLink={Nav} />} />
+                <Route exact path={json[4].target} component={() => <Layout Chat={json[4].message} NavLink={Nav} />} />
+
+                <Route exact path="/profile">{'Здесь сделаю форму настроек имени и загрузки фото как аватара, но потом :) иначе не успею сделать все дз :)'}</Route>
+                {/* <Route exact path="/new">{'К сожалению не успел ф.нового чата ('}</Route> */}
+                <Route component={NotFound} />
+            </Switch >
+        )
+    }
 }
+
 export { Router };
