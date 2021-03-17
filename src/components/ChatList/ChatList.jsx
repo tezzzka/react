@@ -6,8 +6,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import json from '../../JSON/Chats.json';
 
-function ChatList(NavLink = null) {
+function ChatList() {
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '20% !important',
@@ -21,15 +22,14 @@ function ChatList(NavLink = null) {
         return <ListItem button component="a" {...props} />;
     }
     const classes = useStyles();
-    // console.log(NavLink);
 
     return (
         <div id="ChatList" className={classes.root}>
             <List component="nav" className={classes.root}>
-                {NavLink.NavLink.map((link, index) => (
-                    < Link key={index} to={link.NavLink} >
+                {json.map((link, index) => (
+                    < Link key={index} to={link.target} >
                         <ListItem button>
-                            <ListItemText primary={link.ChatName} />
+                            <ListItemText primary={link.name} />
                         </ListItem>
                     </Link>
                 ))

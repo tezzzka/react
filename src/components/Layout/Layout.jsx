@@ -4,6 +4,7 @@ import { ChatList } from '../ChatList';
 import { MessageField } from '../MessageField';
 import { Chat } from '../Chat';
 import { withRouter } from 'react-router';
+
 import './Layout.css';
 
 class _Layout extends Component {
@@ -12,13 +13,15 @@ class _Layout extends Component {
         location: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired
     };
+
     render() {
+        const { match } = this.props;
         return (
             <>
-                <ChatList NavLink={this.props.NavLink} />
+                <ChatList />
                 <div id="Layout">
                     <MessageField>
-                        <Chat MessageBox={this.props.Chat} />
+                        <Chat currentChat={match.params.chatname} />
                     </MessageField>
                 </div>
             </>

@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router';
 
+import json from '../../JSON/Chats.json';
 import './Chat.css';
 
 class _Chat extends Component {
@@ -17,14 +18,37 @@ class _Chat extends Component {
     }
     static propTypes = {
         currentChat: PropTypes.string,
+
     };
     state = {
-        messages: this.props.MessageBox,
+        messages: [],
     };
+
+    // В одном файле json хранится много чатов. Каждый чат - объект, json - массив объектов.
+    // Эта ф.собирает массив из сообщений чата с name = currentChat
+    JsonToState = (prop) => {
+        let A = [];
+        json.map(obj => {
+            if (obj.name == prop) {
+                A = obj.message;
+            }
+        });
+        return A;
+    }
     componentDidMount() {
-        this.scrollToBottom();
+
+        const A = this.JsonToState(this.props.currentChat)
+        console.log(A);
+        console.log(this.props.currentChat);
+        //Инициализируем сообщения конкретно для нашего чата, а имеено считывания сообщения в состояние
+        //И здесь всё хорошо, работает. НО, когда мы ходим по ссылкам чатов не происходит перерендер. почему?
+        //Грубо говоря, мне нужно нажать на ссылку и далее f5 чтобы сообщения заново иницилизировались.
+        //Если запихнуть этот код в ComponentDidUpdate() или после render(), то падает всё.
+        this.setState({ messages: A });
     }
     componentDidUpdate(prevProps, prevState) {
+
+
         this.scrollToBottom();
         // if (prevState.messages.length !== this.state.messages.length &&
         //     this.state.messages.length % 2 === 0) {
@@ -66,6 +90,7 @@ class _Chat extends Component {
     }
 
     render() {
+
         return (
             <div id="Chat">
                 <div className="msgBlock">
