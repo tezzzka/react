@@ -1,0 +1,14 @@
+.Button {
+    background-color: #313383;
+    color: #fff;
+    font-size: 2vh;
+    width: 20vw;
+    height: 32px;
+    border: none;
+}
+.Button:hover,:active {
+    background-color: #797BD5;
+    transition: ease-in 0.2s;
+    border: none;
+}
+
