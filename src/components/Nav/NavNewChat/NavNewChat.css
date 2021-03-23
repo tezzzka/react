@@ -1,0 +1,22 @@
+.NewChatBox {
+    float: right !important;
+
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+ 
+}
+.ava {
+    margin-right: 0;
+}
+.newChat {
+    margin-right: 1rem;
+}
+
+.NewChatButton {
+    color: #042956 !important;  
+    min-width: 48px;
+    min-height: 48px;
+}
