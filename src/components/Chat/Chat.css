@@ -1,0 +1,42 @@
+.msgBlock {
+    max-height: 70vh;
+    width: 30vw;
+    overflow-y: scroll;
+    /* border: 1px solid springgreen; */
+    padding-left: 4vw;
+    padding-right: 4vw;
+    
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #8cc63f;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.Footer {
+    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.messageTextField {
+    float: left;
+}
+.sendButton {
+    /* border: 1px solid greenyellow; */
+    float:right;
+}
+.btn {
+    height: 100%;
+}
+.MuiTextField-root label {
+    font-weight: 300 !important;
+    font-size: 0.5rem !important;
+}
+.SendClass {
+    background-color: #009999 !important;
+}
