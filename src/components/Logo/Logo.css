@@ -1,0 +1,15 @@
+.logotype  {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-left: 1rem;
+    float: left;
+    min-width: 64px;
+    min-height: 64px;
+    
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+ 
+}
