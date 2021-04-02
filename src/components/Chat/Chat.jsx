@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { sendMessage } from '../../redux/actions/messageActions';
 import { compose } from 'redux';
-
+import { } from 'connected-react-router';
 import { Message } from '../Message';
 import './Chat.css';
 import json from '../../JSON/Chats.json';
@@ -14,16 +14,19 @@ import json from '../../JSON/Chats.json';
 class _Chat extends Component {
     static propTypes = {
         currentChat: PropTypes.string,
-        messages: PropTypes.array.isRequired,
+        // messages: PropTypes.array.isRequired,
         sendMessage: PropTypes.func.isRequired,
     };
     state = {
         textMessage: '',
         messages: [],
         currentChat: this.props.currentChat,
+        nickname: this.props.username,
+        avatar: this.props.avatar,
+
     };
 
-    fieldRef = createRef();
+    // fieldRef = createRef();
 
     getClass = (sw) => {
         switch (sw) {
@@ -32,18 +35,23 @@ class _Chat extends Component {
             default: return ' redux';
         }
     }
+    myMessages = (jsonObject, messages, point) => {
+        let nw = [...jsonObject];
+        for (let key = 0; key < messages.length; key++) {
+            messages[key].chatroom == point ?
+                nw.push(messages[key]) : ''
+        }
+        return nw;
+    }
 
     componentDidUpdate(prevState) {
         this.messagesEnd.scrollIntoView({ behavior: "smooth" });
-    }
-    componentDidMount() {
-
     }
 
     addMessage = () => {
         this.state.textMessage.trim().length ?
             (
-                this.props.sendMessage(this.state.textMessage, 'human', this.props.currentChat),
+                this.props.sendMessage(this.state.textMessage, this.props.nickname, this.props.currentChat),
                 this.setState({ textMessage: '' })
             )
             : '';
@@ -51,21 +59,32 @@ class _Chat extends Component {
     addMessageAlt = (e) => {
         e.key == 'Enter' ? this.addMessage() : ''
     }
+    focusHandle = (e) => {
+        // console.log(e);
+    }
 
     jsonLoad = () => {
         return json[this.props.currentChat] ? json[this.props.currentChat].messagesBox : [];
     }
 
+    killMessage = (idx) => {
+        // console.log(idx);
+        // console.log(this.props)
+    }
+
     render() {
+        // console.log(getLocation);
         // console.log(this.props);
         const { messages = {}, currentChat } = this.props;
-        const nw = [...this.jsonLoad(), ...messages];
+        const nw = this.myMessages(this.jsonLoad(), messages, currentChat);
+        // console.log(nw);
         return (
             <div id="Chat">
                 <div className="msgBlock" >
                     {nw.map((msg, idx) => (
                         <Message key={idx} text={msg.value} author={msg.author}
                             className={this.getClass(msg.author)}
+                            onClick={() => this.killMessage(idx)}
                         />
                     ))}
                     <div style={{ float: "left", clear: "both" }}
@@ -77,7 +96,7 @@ class _Chat extends Component {
                         <TextField
                             value={this.state.textMessage}
                             label='type any here...'
-                            // inputRef={this.textRef}
+                            onFocus={(e) => this.focusHandle(e)}
                             onChange={(e) => this.setState({ textMessage: e.target.value })}
                             onKeyPress={(e) => this.addMessageAlt(e)}
                         />
@@ -101,7 +120,10 @@ class _Chat extends Component {
 
 
 const mapStateToProps = (state) => ({
+    // router: state.router,
     messages: state.chat.messages,
+    nickname: state.user.nickname,
+    avatar: state.user.avatar,
 });
 const Chat = compose(
     connect(mapStateToProps, { sendMessage })

@@ -5,11 +5,14 @@ import { List, ListItem, ListItemText, ListItemIcon, Button } from '@material-ui
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { NavRecharger } from '../../redux/reducers/func';
+import json from '../../JSON/Chats.json';
+
 import { connect } from 'react-redux';
 import { createNewChat } from '../../redux/actions/newchat';
 import { compose } from 'redux';
-
-import json from '../../JSON/Chats.json';
 
 class _ChatList extends Component {
     static propTypes = {
@@ -18,13 +21,8 @@ class _ChatList extends Component {
     };
 
     state = {
-        nav: this.props.hello || [],
         custom: [],
-    }
-    componentDidMount() {
-        this.props.hello ? this.state.nav :
-            this.setState({ nav: this.Items() });
-
+        nav: this.props.navi || [],
     }
 
     addChat = () => {
@@ -34,21 +32,7 @@ class _ChatList extends Component {
     ListItemLink = (props) => {
         return <ListItem button component="a" {...props} className={"link"} />;
     }
-    Items = () => {
-        let idx = 0;
-        let NavList = [];
-        for (let [link, val] of Object.entries(json)) {
-            NavList.push(
-                <Link key={idx} to={val.target} >
-                    <ListItem button>
-                        {link}
-                    </ListItem>
-                </Link>
-            )
-            idx++;
-        }
-        return NavList;
-    }
+
     Custom = () => {
         let idx = 0;
         let CustomList = [];
@@ -64,20 +48,16 @@ class _ChatList extends Component {
         })
         return CustomList;
     }
+    componentDidUpdate(prev) {
+        prev.messages.length !== this.props.messages.length ?
+            this.setState({ nav: NavRecharger(json, this.props.messages) }) : '';
+    }
 
     render() {
-        // const { classes } = this.props;
-        // this.setState({ custom: this.Custom() });
-        // console.log(this.props.custom);
+        // console.log(this.props);
+
         return (
             <div id="ChatList">
-                <Button
-                    color="primary" variant="contained"
-                    fullWidth={true}
-                    onClick={this.addChat}
-                    className={"SendClass"}
-                >new
-                    </Button>
                 <List component="nav" >{this.state.nav}</List>
                 <List component="nav">{this.Custom()}</List>
             </div >
@@ -87,6 +67,8 @@ class _ChatList extends Component {
 
 const ToProps = (state) => ({
     custom: state.rooms.links,
+    navi: state.chat.navi,
+    messages: state.chat.messages,
 });
 const ChatList = compose(
     connect(ToProps, { createNewChat })

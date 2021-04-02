@@ -20,8 +20,8 @@ class Message extends Component {
     render() {
         return (
             <StyleRoot>
-                <div className={'msg' + this.props.className} style={styles.rubberBand}>
-                    <div className="msgText">{this.props.text}</div>
+                <div className={'msg' + this.props.className} style={styles.rubberBand} >
+                    <div className="msgText" onClick={this.props.onClick}>{this.props.text}</div>
                     <div className="msgAuthor">{this.props.author}</div>
                 </div >
             </StyleRoot>

@@ -6,14 +6,18 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createNewChat } from '../../../redux/actions/newchat';
 import { compose } from 'redux';
+import { push } from 'connected-react-router';
 
 import './NavNewChat.css';
 
 
-class NavNewChat extends Component {
+class _NavNewChat extends Component {
     addChat = () => {
-        createNewChat('chhat');
+        this.props.createNewChat('free');
     };
+    state = {
+        custom: []
+    }
     render() {
         return (
             <>
@@ -29,5 +33,12 @@ class NavNewChat extends Component {
         );
     }
 }
+
+const ToProps = (state) => ({
+    custom: state.rooms.links,
+});
+const NavNewChat = compose(
+    connect(ToProps, { createNewChat })
+)(_NavNewChat);
 
 export { NavNewChat };
