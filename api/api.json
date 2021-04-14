@@ -1,0 +1,18 @@
+{
+    "APIChat": {
+        "description": "APIChat",
+        "target": "/chat/APIChat",
+        "messagesBox": [
+            {
+                "value": "API Chat is here.",
+                "author": "api",
+                "seen": false
+            },
+            {
+                "value": "API connected.",
+                "author": "api",
+                "seen": false
+            }
+        ]
+    }
+}
