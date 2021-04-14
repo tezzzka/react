@@ -11,7 +11,7 @@ class Logo extends Component {
         return (
             <Link key={'0'} to={'/'}>
 
-                <img src={logo} className={"logotype"} onClick={() => this.props.push('/')} />
+                <img src={logo} className={"logotype"} />
             </Link >
         )
     }

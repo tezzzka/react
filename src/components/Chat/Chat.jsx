@@ -4,18 +4,22 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { sendMessage } from '../../redux/actions/messageActions';
-import { compose } from 'redux';
-import { } from 'connected-react-router';
+import { sendMessage, apiMessage, uploadMessages } from '../../redux/actions/messageActions';
+
+
 import { Message } from '../Message';
 import './Chat.css';
 import json from '../../JSON/Chats.json';
 
+
 class _Chat extends Component {
     static propTypes = {
         currentChat: PropTypes.string,
-        // messages: PropTypes.array.isRequired,
         sendMessage: PropTypes.func.isRequired,
+        apiMessage: PropTypes.func.isRequired,
+        // uploadMessages: PropTypes.func.isRequired,
+        isLoading: PropTypes.bool.isRequired,
+
     };
     state = {
         textMessage: '',
@@ -39,9 +43,16 @@ class _Chat extends Component {
         let nw = [...jsonObject];
         for (let key = 0; key < messages.length; key++) {
             messages[key].chatroom == point ?
-                nw.push(messages[key]) : ''
+                nw.push(messages[key]) : '';
+            if (messages[key].author == 'api') {
+                for (const msg of messages[key].value) nw.push(msg);
+            }
         }
         return nw;
+    }
+
+    componentDidMount() {
+        this.props.uploadMessages();
     }
 
     componentDidUpdate(prevState) {
@@ -52,9 +63,21 @@ class _Chat extends Component {
         this.state.textMessage.trim().length ?
             (
                 this.props.sendMessage(this.state.textMessage, this.props.nickname, this.props.currentChat),
-                this.setState({ textMessage: '' })
+                this.setState({ textMessage: '' }),
+                fetch('http://localhost:3000/APIChat', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        value: this.state.textMessage,
+                        author: 'api',
+                        seen: false
+                    })
+                })
             )
             : '';
+        // this.props.push('/');
     }
     addMessageAlt = (e) => {
         e.key == 'Enter' ? this.addMessage() : ''
@@ -72,21 +95,33 @@ class _Chat extends Component {
         // console.log(this.props)
     }
 
+    nwWrapper = (nw) => {
+        if (!nw || nw.length == 0) return;
+        return (
+            nw.map((msg, idx) => (
+                <Message key={idx} text={msg.value} author={msg.author}
+                    className={this.getClass(msg.author)}
+                    onClick={() => this.killMessage(idx)}
+                />
+            ))
+        )
+    }
+
+
+
     render() {
-        // console.log(getLocation);
-        // console.log(this.props);
-        const { messages = {}, currentChat } = this.props;
+
+        const { messages = {}, currentChat, isLoading = false } = this.props;
+
         const nw = this.myMessages(this.jsonLoad(), messages, currentChat);
-        // console.log(nw);
+        if (isLoading) {
+            console.log('await please.');
+        }
         return (
             <div id="Chat">
                 <div className="msgBlock" >
-                    {nw.map((msg, idx) => (
-                        <Message key={idx} text={msg.value} author={msg.author}
-                            className={this.getClass(msg.author)}
-                            onClick={() => this.killMessage(idx)}
-                        />
-                    ))}
+
+                    {this.nwWrapper(nw)}
                     <div style={{ float: "left", clear: "both" }}
                         ref={(el) => { this.messagesEnd = el; }}>
                     </div>
@@ -120,13 +155,23 @@ class _Chat extends Component {
 
 
 const mapStateToProps = (state) => ({
-    // router: state.router,
     messages: state.chat.messages,
     nickname: state.user.nickname,
     avatar: state.user.avatar,
+    isLoading: state.chat.isLoading,
 });
-const Chat = compose(
-    connect(mapStateToProps, { sendMessage })
-)(_Chat);
+const Chat = connect(mapStateToProps, {
+    sendMessage,
+    apiMessage,
+    uploadMessages,
+})(_Chat);
+// const Chat = compose(
+//     connect(mapStateToProps, {
+//         push,
+//         sendMessage,
+//         apiMessage,
+//         uploadMessages
+//     })
+// )(_Chat);
 
 export { Chat };

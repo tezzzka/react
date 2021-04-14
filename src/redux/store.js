@@ -12,8 +12,8 @@ import storage from 'redux-persist/lib/storage';
 export const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['chat', 'user'],
-    blacklist: [],
+    // whitelist: ['chat', 'user'],
+    // blacklist: [],
 }
 
 const initialState = {
@@ -22,6 +22,7 @@ const initialState = {
             { value: 'Hello from Redux tch.', author: 'ai', chatroom: 'default', seen: false }
         ],
         navi: [],
+        isLoading: false,
     },
     rooms: {
         links: []
